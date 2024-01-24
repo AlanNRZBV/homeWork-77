@@ -1,14 +1,16 @@
 import express from 'express';
 import { MessageData } from '../types';
 import { fileDB } from '../Data/fileDB';
+import { imagesUpload } from '../multer';
 
 export const messagesRouter = express.Router();
 
-messagesRouter.post('/', async (req, res, next) => {
+messagesRouter.post('/',imagesUpload.single('image'), async (req, res, next) => {
   try {
     const message: MessageData = {
       author: req.body.author === '' ? 'Anonymous' : req.body.author,
       message: req.body.message,
+      image: req.file ? req.file.filename : null
     };
 
     if (!message.message) {
