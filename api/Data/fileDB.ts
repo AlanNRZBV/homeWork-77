@@ -19,13 +19,12 @@ export const fileDB = {
     return data.slice(-30);
   },
   async addItem(item: MessageData) {
-    const now = new Date();
+
     const id = crypto.randomUUID();
 
     const message: IMessage = {
       author: item.author,
       message: item.message,
-      date: now.toISOString(),
       id: id,
     };
 
