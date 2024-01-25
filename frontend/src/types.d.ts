@@ -7,3 +7,7 @@ export interface IMessage {
 }
 
 export type MessageWithoutId = Omit<IMessage, "id">
+
+export interface IMessages {
+  messages: IMessage[]
+}

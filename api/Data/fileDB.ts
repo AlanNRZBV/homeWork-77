@@ -25,6 +25,7 @@ export const fileDB = {
     const message: IMessage = {
       author: item.author,
       message: item.message,
+      image: item.image,
       id: id,
     };
 

@@ -2,15 +2,20 @@ import React from 'react';
 import { Grid, TextField } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import { Send } from '@mui/icons-material';
-import {useAppDispatch} from "../../app/hooks.ts";
-import {postMessage} from "./messagesFormSlice.ts";
+import {useAppDispatch, useAppSelector} from "../../app/hooks.ts";
+import {messagesFormState, postMessage} from "./messagesFormSlice.ts";
 import FileInput from "../UI/FileInput/FileInput.tsx";
+import {uploadMessage} from "./messagesFormThunks.ts";
 
 
 const MessagesForm = () => {
+
   const dispatch = useAppDispatch();
+  const message = useAppSelector(messagesFormState )
+
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    dispatch(uploadMessage(message))
   };
 
   const inputChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -20,6 +25,7 @@ const MessagesForm = () => {
     };
     dispatch(postMessage(userInput))
   };
+
 
   return (
       <form onSubmit={onSubmit}>
